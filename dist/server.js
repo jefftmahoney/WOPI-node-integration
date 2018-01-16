@@ -33,14 +33,16 @@ app.route('/wopi/files/:id/contents')
     .all(tokenValidator.isValidToken)
     .get(filesController.fileRequestHandler)
     .post(filesController.fileRequestHandler);
-app.route('/wopi/folders/:id')
-    .all(tokenValidator.isValidToken)
-    .get(filesController.fileRequestHandler)
-    .post(filesController.fileRequestHandler);
-app.route('/wopi/folders/:id/contents')
-    .all(tokenValidator.isValidToken)
-    .get(filesController.fileRequestHandler)
-    .post(filesController.fileRequestHandler);
+// app.route('/wopi/folders/:id')
+//   .all(tokenValidator.isValidToken)
+//   .get(filesController.fileRequestHandler)
+//   .post(filesController.fileRequestHandler)
+//   ;
+// app.route('/wopi/folders/:id/contents')
+//   .all(tokenValidator.isValidToken)
+//   .get(filesController.fileRequestHandler)
+//   .post(filesController.fileRequestHandler)
+//   ;
 // start the server
 app.listen(app.get("port"), () => {
     console.log(("  App is running at http://localhost:%d in %s mode"), app.get("port"), app.get("env"));

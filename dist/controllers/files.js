@@ -8,17 +8,13 @@ exports.fileRequestHandler = (req, res) => {
     let files = new Array();
     let xlFile = new DetailedFile_1.DetailedFile();
     xlFile.BaseFileName = 'myXLFile.xlsx';
-
     files.push(xlFile);
-
-    // let docFile = new DetailedFile_1.DetailedFile();
+    // let docFile = new DetailedFile();
     // docFile.BaseFileName = 'myDocFile.docx';
-    // let pptFile = new DetailedFile_1.DetailedFile();
+    // let pptFile = new DetailedFile();
     // pptFile.BaseFileName = 'myPPTFile.pptx';
-
-    // files.push(docFile);
+    // files.push(docFile);    
     // files.push(pptFile);
-
     utils.PopulateActions(files);
     console.log(files);
 };

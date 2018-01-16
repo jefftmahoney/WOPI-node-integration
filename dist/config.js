@@ -50,6 +50,7 @@ class Constants {
     static get WOPI_URL_PH_THEME_ID() { return "<thm=THEME_ID&>"; }
     static get WOPI_URL_PH_UI_LLCC() { return "<ui=UI_LLCC&>"; }
     static get WOPI_URL_PH_VALIDATOR_TEST_CATEGORY() { return "<testcategory=VALIDATOR_TEST_CATEGORY>"; }
+    static get WOPI_URL_PH_HOST_SESSION_ID() { return "<hid=HOST_SESSION_ID&>"; }
     static get WOPI_URL_PH_LIST() {
         return [
             Constants.WOPI_URL_PH_BUSINESS_USER,
@@ -63,14 +64,18 @@ class Constants {
             Constants.WOPI_URL_PH_RECORDING,
             Constants.WOPI_URL_PH_THEME_ID,
             Constants.WOPI_URL_PH_UI_LLCC,
-            Constants.WOPI_URL_PH_VALIDATOR_TEST_CATEGORY
+            Constants.WOPI_URL_PH_VALIDATOR_TEST_CATEGORY,
+            Constants.WOPI_URL_PH_HOST_SESSION_ID
         ];
     }
     // Cache Keys and values
     static get WOPI_DISCOVERY_CACHE_KEY() { return "wopidisco"; }
-    static get WOPI_DICCOVERY_CACHE_TTL() { return 3600000; } // 1 hr
+    static get WOPI_DISCOVERY_CACHE_TTL() { return 3600000; } // 1 hr
     // WOPI Discovery endpoint
     static get WOPI_DISCOVERY_ENDPOINT() { return 'https://onenote.officeapps-df.live.com/hosting/discovery'; }
+
+    //WOPI Autority URL
+    static get WOPI_AUTHORITY_URL() { return "triconindia-my.sharepoint.com";}
 }
 exports.Constants = Constants;
 //# sourceMappingURL=config.js.map
