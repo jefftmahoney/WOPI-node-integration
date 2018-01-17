@@ -24,9 +24,10 @@ function PopulateActions(files) {
     }
 }
 
-function GetDiscoveryInfo() {
+function GetDiscoveryInfo(callback) {
     // look up the actions in the cache
     let actions = cache.get(config.Constants.WOPI_DISCOVERY_CACHE_KEY);
+    var err ={};
     // have we not already got the actions from WOPI Discovery?
     if (actions == null || actions.length == 0) {
         let rawXML = '';
@@ -35,6 +36,10 @@ function GetDiscoveryInfo() {
         })
             .on('data', function (data) {
                 rawXML = rawXML + data;
+            })
+            .on('error', (e) => {
+                console.log(e);
+                err = e;
             })
             .on('end', function () {
                 xml2js.parseString(rawXML, { attrNameProcessors: [stripHyphens], tagNameProcessors: [stripHyphens] }, function (err, result) {
@@ -65,9 +70,8 @@ function GetDiscoveryInfo() {
                     cache.put(config.Constants.WOPI_DISCOVERY_CACHE_KEY, actions, config.Constants.WOPI_DICCOVERY_CACHE_TTL);
                     let finalActions = actions;
                     console.log('retrieved actions from wopi discovery endpoint');
-                    //  console.log(finalActions[0]);
-                    GetActionUrl(finalActions[0], null, config.Constants.WOPI_AUTHORITY_URL);
-                    return finalActions;
+                    //  GetActionUrl(finalActions, null, config.Constants.WOPI_AUTHORITY_URL);
+                    callback(err, finalActions)
                 });
             });
     }
@@ -75,7 +79,7 @@ function GetDiscoveryInfo() {
         console.log('got actions from cache');
         console.log('actions');
         let finalActions = actions;
-        return finalActions;
+        callback(err, finalActions);
     }
 }
 
@@ -84,7 +88,7 @@ function stripHyphens(name) {
 }
 
 
-function GetActionUrl(action, file, authority) {
+function GetActionUrl(action, fileId, authority, callback) {
     //get the action url
     var urlsrc = action.urlsrc;
 
@@ -97,8 +101,7 @@ function GetActionUrl(action, file, authority) {
             if (p !== null || !p.length) {
                 urlsrc = urlsrc.replace(p, ph + "&");
                 phCnt++;
-            }
-            else {
+            } else {
                 urlsrc = urlsrc.replace(p, ph);
             }
         }
@@ -106,9 +109,9 @@ function GetActionUrl(action, file, authority) {
 
     //authority = 'triconindia-my.sharepoint.com';
     //Add WOPISrc to end of request 
-    urlsrc += ((phCnt > 0) ? "" : "?") + 'WOPISrc=https://' + authority + '/wopi/files/' + '01N7NB4CBYJ3MVMIMCS5DYAIZ6B5IWBHDD'//String(file.id);
-    console.log(urlsrc);
-    return urlsrc;
+    urlsrc += ((phCnt > 0) ? "" : "?") + 'WOPISrc=https://' + authority + '/wopi/files/' + String(fileId)//String(file.id);
+    console.log("Action URL: " + urlsrc);
+    callback(urlsrc);
 }
 
 
@@ -136,6 +139,7 @@ function getPlaceholderValue(placeholder) {
         case config.Constants.WOPI_URL_PH_DISABLE_CHAT:
             result = ph + "false";
             break;
+        case config.Constants.WOPI_URL_PH_ACTIVITY_NAVIGATION_ID:
         case config.Constants.WOPI_URL_PH_HOST_SESSION_ID:
         case config.Constants.WOPI_URL_PH_PERFSTATS:
             result = ph + ""; // No documentation
@@ -151,6 +155,11 @@ function getPlaceholderValue(placeholder) {
     return result;
 }
 
+function validateProof() {
+    return true;
+}
+
+exports.validateProof = validateProof;
 exports.GetDiscoveryInfo = GetDiscoveryInfo;
 exports.GetActionUrl = GetActionUrl;
 exports.PopulateActions = PopulateActions;

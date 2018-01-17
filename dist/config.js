@@ -51,6 +51,7 @@ class Constants {
     static get WOPI_URL_PH_UI_LLCC() { return "<ui=UI_LLCC&>"; }
     static get WOPI_URL_PH_VALIDATOR_TEST_CATEGORY() { return "<testcategory=VALIDATOR_TEST_CATEGORY>"; }
     static get WOPI_URL_PH_HOST_SESSION_ID() { return "<hid=HOST_SESSION_ID&>"; }
+    static get WOPI_URL_PH_ACTIVITY_NAVIGATION_ID() { return "<actnavid=ACTIVITY_NAVIGATION_ID&>"}
     static get WOPI_URL_PH_LIST() {
         return [
             Constants.WOPI_URL_PH_BUSINESS_USER,
@@ -65,7 +66,8 @@ class Constants {
             Constants.WOPI_URL_PH_THEME_ID,
             Constants.WOPI_URL_PH_UI_LLCC,
             Constants.WOPI_URL_PH_VALIDATOR_TEST_CATEGORY,
-            Constants.WOPI_URL_PH_HOST_SESSION_ID
+            Constants.WOPI_URL_PH_HOST_SESSION_ID,
+            Constants.WOPI_URL_PH_ACTIVITY_NAVIGATION_ID
         ];
     }
     // Cache Keys and values

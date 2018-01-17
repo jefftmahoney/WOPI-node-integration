@@ -13,8 +13,12 @@
     "memory-cache": "^0.1.6",
     "morgan": "^1.8.2",
     "node-cache": "^4.1.1",
+    "passport": "^0.4.0",
+    "passport-azure-ad": "^3.0.9",
     "request": "^2.81.0",
+    "superagent": "^3.8.2",
     "typescript": "^2.3.4",
+    "uuid": "^3.2.1",
     "xml2js": "^0.4.17"
   },
   "devDependencies": {
@@ -37,7 +41,7 @@
   "scripts": {
     "start": "npm run build && npm run watch",
     "build": "npm run build-sass && npm run build-ts && npm run tslint",
-    "serve": "node dist/server.js",
+    "serve": "nodemon dist/server.js",
     "watch": "concurrently -k -p \"[{name}]\" -n \"Sass,TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-sass\" \"npm run watch-ts\" \"nodemon dist/server.js\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-ts": "tsc",
@@ -54,5 +58,5 @@
     "WOPI",
     "Office Online"
   ],
-  "author": "testUser"   
+  "author": "testUser"
 }
