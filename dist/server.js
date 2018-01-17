@@ -16,7 +16,7 @@ const homeController = require("./controllers/home");
 const filesController = require("./controllers/files");
 
 const session = require('express-session');
-const passport = require ('./officeAuth/officeAccess');
+//const passport = require ('./officeAuth/officeAccess');
 
 // token security code
 const tokenValidator = require("./security/tokenValidator");
@@ -44,8 +44,8 @@ app.use(session({
   }));
   
 //office online authentication for getting access token  
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 
 
@@ -60,7 +60,7 @@ app.route('/wopi/files/:id')
 
 app.route('/wopi/files/:id/contents')
     .all(tokenValidator.isValidToken)
-    .get(filesController.getFile);
+    .get(filesController.getFileContent);
 
 // app.route('/wopi/folders/:id')
 //   .all(tokenValidator.isValidToken)

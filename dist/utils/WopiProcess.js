@@ -14,14 +14,15 @@ const graphUtil = require ('./GraphUtil');
 module.exports.ProcessWopiRequest = function (req, res) {
 
     //Write code to get file
-
+   console.log(req.url + " " + req.method + "\n" + JSON.stringify(req.headers));
     var fileId = req.params.id;
     console.log(fileId);
     var file= {};
-    const accessToken = 'eyJ0eXAiOiJKV1QiLCJub25jZSI6IkFRQUJBQUFBQUFCSGg0a21TX2FLVDVYcmp6eFJBdEh6ZEFoU2dMc3l2cFp2UUp6MjRNc0N4WEhjZEdWNGRvdEhxTWZXcEZ1Wko4bzRhXy1pVi1NOF9HN1JubExaQ1hCNkc2WWVtT0prUUp6LTZJeG1QWHh4YlNBQSIsImFsZyI6IlJTMjU2IiwieDV0IjoiejQ0d01kSHU4d0tzdW1yYmZhSzk4cXhzNVlJIiwia2lkIjoiejQ0d01kSHU4d0tzdW1yYmZhSzk4cXhzNVlJIn0.eyJhdWQiOiJodHRwczovL2dyYXBoLm1pY3Jvc29mdC5jb20iLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC82YmEwNDQzOS04YjBlLTQzZWUtYWQyNi1jMmFjOWVmOWU3NjUvIiwiaWF0IjoxNTE2MjAwNjc1LCJuYmYiOjE1MTYyMDA2NzUsImV4cCI6MTUxNjIwNDU3NSwiYWNyIjoiMSIsImFpbyI6IlkyTmdZQkJxWi80Wi9tdFRwMER5MHUvM0xwZzhFNWY0RUhiTGVxTCtHZzdiaXduT3B4Z0IiLCJhbXIiOlsicHdkIl0sImFwcF9kaXNwbGF5bmFtZSI6IkV4Y2VsIFBPQyIsImFwcGlkIjoiNjEzYjhmMWQtZmM2OC00Nzk1LWEyYTUtMmI1NThiN2NiNDQyIiwiYXBwaWRhY3IiOiIxIiwiZmFtaWx5X25hbWUiOiJVa2FuZHJhbyBHYWRyZSIsImdpdmVuX25hbWUiOiJWYWliaGF2IiwiaXBhZGRyIjoiMTgwLjE1MS4xOTcuMTMwIiwibmFtZSI6IlZhaWJoYXYgVWthbmRyYW8gR2FkcmUiLCJvaWQiOiJjNzJhODZjOC1mZjUxLTRjMmYtYjNmNC0yMjMyNTFhZDVmMjYiLCJvbnByZW1fc2lkIjoiUy0xLTUtMjEtMjY0NDIwMDg1MC0zMjg5Mzg4NTQxLTI0MDIwMTQ2NjktMjQ2MDQiLCJwbGF0ZiI6IjMiLCJwdWlkIjoiMTAwMzAwMDBBNjkzRDYzRSIsInNjcCI6IkNhbGVuZGFycy5SZWFkV3JpdGUgRmlsZXMuUmVhZFdyaXRlIE1haWwuUmVhZC5TaGFyZWQgTWFpbC5TZW5kIFVzZXIuUmVhZCBVc2VyLlJlYWRCYXNpYy5BbGwiLCJzaWduaW5fc3RhdGUiOlsia21zaSJdLCJzdWIiOiJtb056YmlDRzNEZGJiQTJQcmRVZmhPRE9fUVgwR0h5M2xjR3ctU1BqekgwIiwidGlkIjoiNmJhMDQ0MzktOGIwZS00M2VlLWFkMjYtYzJhYzllZjllNzY1IiwidW5pcXVlX25hbWUiOiJ2YWliaGF2QFRyaWNvbmluZm90ZWNoLmNvbSIsInVwbiI6InZhaWJoYXZAVHJpY29uaW5mb3RlY2guY29tIiwidXRpIjoiSGVmLWxQYVJfRXljemN2X1ljMVNBQSIsInZlciI6IjEuMCJ9.kSVKr1tq5FA10slgTXpofpQYkxZ8e_m9aY3y-tM17bskPyHnXfEjfxCR1TK4XUfXOD_z9dtuZzd6QmCSBMNO0Rsj10XT1ALtq2f_0RmrU4y12iiQLF2Pj6HwWbdoWzxzGmed3B1aIz1Mqv0XV-BeUF5Se3sEsBT3koBrIghoJ0ucngyypeo0x6qjERMR4ZV6qoTqx25Y5JE98CiUzsyBD0pR_mAPKy36ze2SSO0g53GUi39esXlKJIXEedl2Qc3CXS0ASwJeX2rv5qmFfk50rfrke7VDVvQ5W_e-MT3i1Spq4kjFJSe66WeLitRGNIm4JtdKyrIMELx1-KstpC7p2w';
+    const accessToken = "eyJ0eXAiOiJKV1QiLCJub25jZSI6IkFRQUJBQUFBQUFCSGg0a21TX2FLVDVYcmp6eFJBdEh6elBmRGRuMjBBNnI4LVliSGZXSjdwNmlhY3BIYi1EMndtMlhGOW9ZcFVWQjVhdGttX3NJZXFueHBHUUxRcDczZGdFYUoxeHZsWGdrSDZPb29ENkpFQXlBQSIsImFsZyI6IlJTMjU2IiwieDV0IjoiejQ0d01kSHU4d0tzdW1yYmZhSzk4cXhzNVlJIiwia2lkIjoiejQ0d01kSHU4d0tzdW1yYmZhSzk4cXhzNVlJIn0.eyJhdWQiOiJodHRwczovL2dyYXBoLm1pY3Jvc29mdC5jb20iLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC82YmEwNDQzOS04YjBlLTQzZWUtYWQyNi1jMmFjOWVmOWU3NjUvIiwiaWF0IjoxNTE2MjEyNDAxLCJuYmYiOjE1MTYyMTI0MDEsImV4cCI6MTUxNjIxNjMwMSwiYWNyIjoiMSIsImFpbyI6IlkyTmdZRWdza21ydjU3TS83aXN0WlpkemZvdUJRTEptZWx0eGVmYUtKZjY4Vzk3M3ZRY0EiLCJhbXIiOlsicHdkIl0sImFwcF9kaXNwbGF5bmFtZSI6IkV4Y2VsIFBPQyIsImFwcGlkIjoiNjEzYjhmMWQtZmM2OC00Nzk1LWEyYTUtMmI1NThiN2NiNDQyIiwiYXBwaWRhY3IiOiIxIiwiZmFtaWx5X25hbWUiOiJVa2FuZHJhbyBHYWRyZSIsImdpdmVuX25hbWUiOiJWYWliaGF2IiwiaXBhZGRyIjoiMTA2LjUxLjcxLjQ3IiwibmFtZSI6IlZhaWJoYXYgVWthbmRyYW8gR2FkcmUiLCJvaWQiOiJjNzJhODZjOC1mZjUxLTRjMmYtYjNmNC0yMjMyNTFhZDVmMjYiLCJvbnByZW1fc2lkIjoiUy0xLTUtMjEtMjY0NDIwMDg1MC0zMjg5Mzg4NTQxLTI0MDIwMTQ2NjktMjQ2MDQiLCJwbGF0ZiI6IjMiLCJwdWlkIjoiMTAwMzAwMDBBNjkzRDYzRSIsInNjcCI6IkNhbGVuZGFycy5SZWFkV3JpdGUgRmlsZXMuUmVhZFdyaXRlIE1haWwuUmVhZC5TaGFyZWQgTWFpbC5TZW5kIFVzZXIuUmVhZCBVc2VyLlJlYWRCYXNpYy5BbGwiLCJzaWduaW5fc3RhdGUiOlsia21zaSJdLCJzdWIiOiJtb056YmlDRzNEZGJiQTJQcmRVZmhPRE9fUVgwR0h5M2xjR3ctU1BqekgwIiwidGlkIjoiNmJhMDQ0MzktOGIwZS00M2VlLWFkMjYtYzJhYzllZjllNzY1IiwidW5pcXVlX25hbWUiOiJ2YWliaGF2QFRyaWNvbmluZm90ZWNoLmNvbSIsInVwbiI6InZhaWJoYXZAVHJpY29uaW5mb3RlY2guY29tIiwidXRpIjoiSUNvLW51WWN2RUtQYWZTekpteFJBQSIsInZlciI6IjEuMCJ9.UYiyH0BRNrJc_Qzy4z5L2BlW5fRDyPhu5ZrT7-9v9zMbqnjrSHgMwhc1U3Lx8_nz0xtnajcYuKUJDOx7PxfUa4fJvJgfGRTKHIv9QdOnFL81Kq5m8fUOwhugZ_ORdDsCCpTGkFhvz8RUXuXjQCbP5gu5TYj6TjORK1pWr-A0SHJdgl1jmDAWbg9LdoVjMA-fcROzNniVOXT3LjHzkiuljnZ8nCUKJu0GxPUwanbWqfeOVsfJ-_8iLpvJSO6s2_z8sPZ-gZgPmC3r_bxsIu31uHKkR7dp5PtV6PjEx9VZbH94VYH6GKRH_D4LIi_Zra1LVtbVUadwOmLC0Mzh_pr5nA";
     // get office online file graph api endpoint call;
     graphUtil.getDriveFile (accessToken, fileId, (err, file) => {
         if(!err) {
+            console.log("ID: " + file.id + "  Name: " + file.name);
              file = file;
         }
     })
@@ -39,7 +40,7 @@ module.exports.ProcessWopiRequest = function (req, res) {
 
             var view = linq.from(actions).where(i => i.ext == fileExt && i.name == "view").firstOrDefault();
 
-            console.log("view value: " +view);
+            //console.log("view value: " +JSON.stringify(view));
 
             if (view != null) {
                 WopiUtil.GetActionUrl(view, fileId, config.Constants.WOPI_AUTHORITY_URL, (viewUrl) => {
@@ -61,6 +62,7 @@ module.exports.ProcessWopiRequest = function (req, res) {
 
             });
 
+            res.end("Done...");
                         // Get the user from the token (token is already validated)
            // file.UserId = WopiSecurity.GetUserFromToken(request.AccessToken);
 
