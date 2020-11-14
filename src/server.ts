@@ -7,7 +7,7 @@ import expressValidator = require("express-validator");
 import * as session from "express-session";
 import * as path from "path";
 
-dotenv.config();
+dotenv.config(); // 2020-11-13: trivial change I'm adding
 
 // controllers
 import * as homeController from "./controllers/home";
